@@ -384,7 +384,7 @@ impl Settings {
     }
   }
 
-  pub(crate) fn bitcoin_rpc_client(&self, wallet: Option<String>) -> Result<Client> {
+  pub fn bitcoin_rpc_client(&self, wallet: Option<String>) -> Result<Client> {
     let rpc_url = self.bitcoin_rpc_url(wallet);
 
     let bitcoin_credentials = self.bitcoin_credentials()?;
@@ -445,7 +445,7 @@ impl Settings {
     Ok(client)
   }
 
-  pub(crate) fn chain(&self) -> Chain {
+  pub fn chain(&self) -> Chain {
     self.chain.unwrap()
   }
 

@@ -64,7 +64,7 @@ pub struct Options {
   #[arg(long, help = "Run in integration test mode.")]
   pub(crate) integration_test: bool,
   #[arg(long, help = "Minify JSON output.")]
-  pub(crate) minify: bool,
+  pub minify: bool,
   #[arg(
     long,
     short,

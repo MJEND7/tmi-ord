@@ -154,7 +154,7 @@ impl Wallet {
     &self.inscriptions
   }
 
-  pub(crate) fn inscription_info(&self) -> BTreeMap<InscriptionId, api::Inscription> {
+  pub fn inscription_info(&self) -> BTreeMap<InscriptionId, api::Inscription> {
     self.inscription_info.clone()
   }
 

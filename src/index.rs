@@ -1854,7 +1854,7 @@ impl Index {
     )
   }
 
-  pub(crate) fn inscription_info(
+  pub fn inscription_info(
     &self,
     query: query::Inscription,
   ) -> Result<Option<(api::Inscription, Option<TxOut>, Inscription)>> {

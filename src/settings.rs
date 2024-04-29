@@ -30,7 +30,7 @@ pub struct Settings {
 }
 
 impl Settings {
-  pub(crate) fn load(options: Options) -> Result<Settings> {
+  pub fn load(options: Options) -> Result<Settings> {
     let mut env = BTreeMap::<String, String>::new();
 
     for (var, value) in env::vars_os() {
@@ -285,7 +285,7 @@ impl Settings {
     }
   }
 
-  pub(crate) fn or_defaults(self) -> Result<Self> {
+  pub(cr) fn or_defaults(self) -> Result<Self> {
     let chain = self.chain.unwrap_or_default();
 
     let bitcoin_data_dir = match &self.bitcoin_data_dir {

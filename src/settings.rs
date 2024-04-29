@@ -285,7 +285,7 @@ impl Settings {
     }
   }
 
-  pub(cr) fn or_defaults(self) -> Result<Self> {
+  pub fn or_defaults(self) -> Result<Self> {
     let chain = self.chain.unwrap_or_default();
 
     let bitcoin_data_dir = match &self.bitcoin_data_dir {

@@ -1,18 +1,18 @@
 [package]
-name = "ord"
-description = "◉ Ordinal wallet and block explorer"
+name = "tmi-ord"
+description = "Ordinal/Sat tracking for tmi (based off ord◉)"
 version = "0.18.3"
 license = "CC0-1.0"
 edition = "2021"
 autotests = false
-homepage = "https://github.com/ordinals/ord"
-repository = "https://github.com/ordinals/ord"
+homepage = "https://github.com/MJEND7/tmi-ord"
+repository = "https://github.com/MJEND7/tmi-ord"
 autobins = false
 rust-version = "1.76.0"
 
 [package.metadata.deb]
 copyright = "The Ord Maintainers"
-maintainer = "The Ord Maintainers"
+maintainer = "MJEND7"
 
 [workspace]
 members = [".", "crates/*"]

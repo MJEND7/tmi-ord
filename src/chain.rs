@@ -13,7 +13,7 @@ pub enum Chain {
 }
 
 impl Chain {
-  pub(crate) fn network(self) -> Network {
+  pub fn network(self) -> Network {
     self.into()
   }
 

@@ -21,6 +21,12 @@ pub struct Options {
     help = "Authenticate to Bitcoin Core RPC as <BITCOIN_RPC_USERNAME>."
   )]
   pub(crate) bitcoin_rpc_username: Option<String>,
+  #[arg(
+    long = "postgresql-uri",
+    value_enum,
+    help = "Connect to postgres with <URI>. [default: postgres://btc_indexer:btc@localhost/btc_indexer]"
+  )]
+  pub(crate) postgres_uri: Option<String>,
   #[arg(long = "chain", value_enum, help = "Use <CHAIN>. [default: mainnet]")]
   pub(crate) chain_argument: Option<Chain>,
   #[arg(

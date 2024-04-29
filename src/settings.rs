@@ -7,6 +7,7 @@ pub struct Settings {
   bitcoin_rpc_password: Option<String>,
   bitcoin_rpc_url: Option<String>,
   bitcoin_rpc_username: Option<String>,
+  pub postgres_uri: Option<String>, //Support for postgres database
   chain: Option<Chain>,
   commit_interval: Option<usize>,
   config: Option<PathBuf>,
@@ -111,6 +112,7 @@ impl Settings {
       bitcoin_rpc_password: self.bitcoin_rpc_password.or(source.bitcoin_rpc_password),
       bitcoin_rpc_url: self.bitcoin_rpc_url.or(source.bitcoin_rpc_url),
       bitcoin_rpc_username: self.bitcoin_rpc_username.or(source.bitcoin_rpc_username),
+      postgres_uri: self.postgres_uri.or(source.postgres_uri),
       chain: self.chain.or(source.chain),
       commit_interval: self.commit_interval.or(source.commit_interval),
       config: self.config.or(source.config),
@@ -150,6 +152,7 @@ impl Settings {
       bitcoin_rpc_password: options.bitcoin_rpc_password,
       bitcoin_rpc_url: options.bitcoin_rpc_url,
       bitcoin_rpc_username: options.bitcoin_rpc_username,
+      postgres_uri: options.postgres_uri,
       chain: options
         .signet
         .then_some(Chain::Signet)
@@ -233,6 +236,7 @@ impl Settings {
       bitcoin_rpc_password: get_string("BITCOIN_RPC_PASSWORD"),
       bitcoin_rpc_url: get_string("BITCOIN_RPC_URL"),
       bitcoin_rpc_username: get_string("BITCOIN_RPC_USERNAME"),
+      postgres_uri: get_string("POSTGRES_URI"),
       chain: get_chain("CHAIN")?,
       commit_interval: get_usize("COMMIT_INTERVAL")?,
       config: get_path("CONFIG"),
@@ -262,6 +266,7 @@ impl Settings {
       bitcoin_rpc_password: None,
       bitcoin_rpc_url: Some(rpc_url.into()),
       bitcoin_rpc_username: None,
+      postgres_uri: None,
       chain: Some(Chain::Regtest),
       commit_interval: None,
       config: None,
@@ -313,6 +318,11 @@ impl Settings {
       None => Self::default_data_dir()?,
     });
 
+    let psql_uri = match &self.postgres_uri {
+      Some(uri) => uri.clone(),
+      None => panic!("No `postgres_uri` found"),
+    };
+
     let index = match &self.index {
       Some(path) => path.clone(),
       None => data_dir.join("index.redb"),
@@ -328,6 +338,7 @@ impl Settings {
           .unwrap_or_else(|| format!("127.0.0.1:{}", chain.default_rpc_port())),
       ),
       bitcoin_rpc_username: self.bitcoin_rpc_username,
+      postgres_uri: Some(psql_uri),
       chain: Some(chain),
       commit_interval: Some(self.commit_interval.unwrap_or(5000)),
       config: None,
@@ -1013,6 +1024,7 @@ mod tests {
         bitcoin_rpc_password: Some("bitcoin password".into()),
         bitcoin_rpc_url: Some("url".into()),
         bitcoin_rpc_username: Some("bitcoin username".into()),
+        postgres_uri: Some("postgres://btc_indexer:btc@localhost/btc_indexer".into()),
         chain: Some(Chain::Signet),
         commit_interval: Some(1),
         config: Some("config".into()),
@@ -1058,6 +1070,7 @@ mod tests {
           "--bitcoin-rpc-password=bitcoin password",
           "--bitcoin-rpc-url=url",
           "--bitcoin-rpc-username=bitcoin username",
+          "--postgres_uri=postgresql db uri",
           "--chain=signet",
           "--commit-interval=1",
           "--config=config",
@@ -1084,6 +1097,7 @@ mod tests {
         bitcoin_rpc_password: Some("bitcoin password".into()),
         bitcoin_rpc_url: Some("url".into()),
         bitcoin_rpc_username: Some("bitcoin username".into()),
+        postgres_uri: Some("postgres://btc_indexer:btc@localhost/btc_indexer".into()),
         chain: Some(Chain::Signet),
         commit_interval: Some(1),
         config: Some("config".into()),
@@ -1155,3 +1169,4 @@ mod tests {
     );
   }
 }
+

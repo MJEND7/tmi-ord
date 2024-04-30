@@ -1,7 +1,7 @@
 [package]
 name = "tmi-ord"
 description = "Ordinal/Sat tracking for tmi (based off ord◉)"
-version = "0.1.1"
+version = "0.1.2"
 license = "CC0-1.0"
 edition = "2021"
 autotests = false

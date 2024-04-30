@@ -231,7 +231,7 @@ bitcoin-cli -datadir={datadir} getblockchaininfo
     );
 
     loop {
-      if SHUTTING_DOWN.load(atomic::Ordering::Relaxed) {
+      if SHUTTING_DOWN.load(atomic::Ordering::Acquire) {
         break Ok(None);
       }
 

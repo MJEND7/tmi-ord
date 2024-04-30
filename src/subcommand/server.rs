@@ -146,7 +146,7 @@ impl Server {
       let integration_test = settings.integration_test();
 
       let index_thread = thread::spawn(move || loop {
-        if SHUTTING_DOWN.load(atomic::Ordering::Relaxed) {
+        if SHUTTING_DOWN.load(atomic::Ordering::Acquire) {
           break;
         }
 

@@ -127,7 +127,7 @@ impl<'index> Updater<'index> {
           )?;
       }
 
-      if SHUTTING_DOWN.load(atomic::Ordering::Relaxed) {
+      if SHUTTING_DOWN.load(atomic::Ordering::Acquire) {
         break;
       }
     }

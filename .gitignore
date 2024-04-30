@@ -9,6 +9,7 @@
 /fuzz/coverage
 /fuzz/target
 /ord.log
+/config.yml
 /target
 /test-times.txt
 /tmp

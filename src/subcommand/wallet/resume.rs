@@ -14,7 +14,7 @@ impl Resume {
   pub(crate) fn run(self, wallet: Wallet) -> SubcommandResult {
     let mut etchings = Vec::new();
     loop {
-      if SHUTTING_DOWN.load(atomic::Ordering::Relaxed) {
+      if SHUTTING_DOWN.load(atomic::Ordering::Acquire) {
         break;
       }
 

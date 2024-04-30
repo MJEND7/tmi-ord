@@ -518,7 +518,7 @@ impl Index {
       sat_index: statistic(Statistic::IndexSats)? != 0,
       started: self.started,
       transaction_index: statistic(Statistic::IndexTransactions)? != 0,
-      unrecoverably_reorged: self.unrecoverably_reorged.load(atomic::Ordering::Relaxed),
+      unrecoverably_reorged: self.unrecoverably_reorged.load(atomic::Ordering::Acquire),
       uptime: (Utc::now() - self.started).to_std()?,
     })
   }
@@ -641,7 +641,7 @@ impl Index {
             Some(&reorg::Error::Unrecoverable) => {
               self
                 .unrecoverably_reorged
-                .store(true, atomic::Ordering::Relaxed);
+                .store(true, atomic::Ordering::Release);
               return Err(anyhow!(reorg::Error::Unrecoverable));
             }
             _ => return Err(err),
@@ -711,7 +711,7 @@ impl Index {
       }
       writeln!(writer)?;
 
-      if SHUTTING_DOWN.load(atomic::Ordering::Relaxed) {
+      if SHUTTING_DOWN.load(atomic::Ordering::Acquire) {
         break;
       }
     }

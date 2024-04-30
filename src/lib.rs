@@ -223,7 +223,7 @@ pub fn parse_ord_server_args(args: &str) -> (Settings, subcommand::server::Serve
 fn gracefully_shutdown_indexer() {
   if let Some(indexer) = INDEXER.lock().unwrap().take() {
     // We explicitly set this to true to notify the thread to not take on new work
-    SHUTTING_DOWN.store(true, atomic::Ordering::Relaxed);
+    SHUTTING_DOWN.store(true, atomic::Ordering::Release);
     log::info!("Waiting for index thread to finish...");
     if indexer.join().is_err() {
       log::warn!("Index thread panicked; join failed");
@@ -234,7 +234,7 @@ fn gracefully_shutdown_indexer() {
 pub fn main() {
   env_logger::init();
   ctrlc::set_handler(move || {
-    if SHUTTING_DOWN.fetch_or(true, atomic::Ordering::Relaxed) {
+    if SHUTTING_DOWN.fetch_or(true, atomic::Ordering::Acquire) {
       process::exit(1);
     }
 

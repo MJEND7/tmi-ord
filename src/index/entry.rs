@@ -407,7 +407,7 @@ impl Entry for InscriptionId {
   }
 }
 
-pub(super) type OutPointValue = [u8; 36];
+pub type OutPointValue = [u8; 36];
 
 impl Entry for OutPoint {
   type Value = OutPointValue;
@@ -466,7 +466,7 @@ impl Entry for SatRange {
   }
 }
 
-pub(super) type TxidValue = [u8; 32];
+pub type TxidValue = [u8; 32];
 
 impl Entry for Txid {
   type Value = TxidValue;

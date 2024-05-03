@@ -37,7 +37,7 @@ use {
 
 pub use self::entry::RuneEntry;
 
-pub(crate) mod entry;
+pub mod entry;
 pub mod event;
 mod fetcher;
 mod lot;

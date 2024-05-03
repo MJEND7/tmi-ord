@@ -26,14 +26,14 @@ impl Chain {
     }
   }
 
-  pub(crate) fn inscription_content_size_limit(self) -> Option<usize> {
+  pub fn inscription_content_size_limit(self) -> Option<usize> {
     match self {
       Self::Mainnet | Self::Regtest => None,
       Self::Testnet | Self::Signet => Some(1024),
     }
   }
 
-  pub(crate) fn first_inscription_height(self) -> u32 {
+  pub fn first_inscription_height(self) -> u32 {
     match self {
       Self::Mainnet => 767430,
       Self::Regtest => 0,
@@ -42,11 +42,11 @@ impl Chain {
     }
   }
 
-  pub(crate) fn first_rune_height(self) -> u32 {
+  pub fn first_rune_height(self) -> u32 {
     Rune::first_rune_height(self.into())
   }
 
-  pub(crate) fn jubilee_height(self) -> u32 {
+  pub fn jubilee_height(self) -> u32 {
     match self {
       Self::Mainnet => 824544,
       Self::Regtest => 110,

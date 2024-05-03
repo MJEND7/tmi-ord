@@ -10,8 +10,8 @@ use {
   std::iter::Peekable,
 };
 
-pub(crate) const PROTOCOL_ID: [u8; 3] = *b"ord";
-pub(crate) const BODY_TAG: [u8; 0] = [];
+pub const PROTOCOL_ID: [u8; 3] = *b"ord";
+pub const BODY_TAG: [u8; 0] = [];
 
 type Result<T> = std::result::Result<T, script::Error>;
 type RawEnvelope = Envelope<Vec<Vec<u8>>>;
@@ -90,7 +90,7 @@ impl From<RawEnvelope> for ParsedEnvelope {
 }
 
 impl ParsedEnvelope {
-  pub(crate) fn from_transaction(transaction: &Transaction) -> Vec<Self> {
+  pub fn from_transaction(transaction: &Transaction) -> Vec<Self> {
     RawEnvelope::from_transaction(transaction)
       .into_iter()
       .map(|envelope| envelope.into())
@@ -99,7 +99,7 @@ impl ParsedEnvelope {
 }
 
 impl RawEnvelope {
-  pub(crate) fn from_transaction(transaction: &Transaction) -> Vec<Self> {
+  pub fn from_transaction(transaction: &Transaction) -> Vec<Self> {
     let mut envelopes = Vec::new();
 
     for (i, input) in transaction.input.iter().enumerate() {

@@ -106,7 +106,7 @@ pub mod decimal;
 mod deserialize_from_str;
 mod fee_rate;
 pub mod index;
-mod inscriptions;
+pub mod inscriptions;
 mod into_usize;
 mod macros;
 mod object;

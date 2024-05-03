@@ -9,7 +9,7 @@ pub use self::{
 
 mod envelope;
 mod inscription;
-pub(crate) mod inscription_id;
-pub(crate) mod media;
+pub mod inscription_id;
+pub mod media;
 mod tag;
-pub(crate) mod teleburn;
+pub mod teleburn;

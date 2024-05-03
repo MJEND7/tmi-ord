@@ -423,7 +423,7 @@ impl Entry for OutPoint {
   }
 }
 
-pub(super) type SatPointValue = [u8; 44];
+pub type SatPointValue = [u8; 44];
 
 impl Entry for SatPoint {
   type Value = SatPointValue;

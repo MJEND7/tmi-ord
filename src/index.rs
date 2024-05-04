@@ -93,7 +93,7 @@ pub enum Statistic {
 }
 
 impl Statistic {
-  fn key(self) -> u64 {
+  pub fn key(self) -> u64 {
     self.into()
   }
 }

@@ -1,9 +1,9 @@
 use super::*;
 
-pub(crate) struct Rtx(pub(crate) redb::ReadTransaction);
+pub struct Rtx(pub redb::ReadTransaction);
 
 impl Rtx {
-  pub(crate) fn block_height(&self) -> Result<Option<Height>> {
+  pub fn block_height(&self) -> Result<Option<Height>> {
     Ok(
       self
         .0
@@ -15,7 +15,7 @@ impl Rtx {
     )
   }
 
-  pub(crate) fn block_count(&self) -> Result<u32> {
+  pub fn block_count(&self) -> Result<u32> {
     Ok(
       self
         .0
@@ -28,7 +28,7 @@ impl Rtx {
     )
   }
 
-  pub(crate) fn block_hash(&self, height: Option<u32>) -> Result<Option<BlockHash>> {
+  pub fn block_hash(&self, height: Option<u32>) -> Result<Option<BlockHash>> {
     let height_to_block_header = self.0.open_table(HEIGHT_TO_BLOCK_HEADER)?;
 
     Ok(

@@ -8,7 +8,7 @@ pub trait Entry: Sized {
   fn store(self) -> Self::Value;
 }
 
-pub(super) type HeaderValue = [u8; 80];
+pub type HeaderValue = [u8; 80];
 
 impl Entry for Header {
   type Value = HeaderValue;
@@ -439,7 +439,7 @@ impl Entry for SatPoint {
   }
 }
 
-pub(super) type SatRange = (u64, u64);
+pub type SatRange = (u64, u64);
 
 impl Entry for SatRange {
   type Value = [u8; 11];

@@ -74,7 +74,7 @@ define_table! { TRANSACTION_ID_TO_TRANSACTION, &TxidValue, &[u8] }
 define_table! { WRITE_TRANSACTION_STARTING_BLOCK_COUNT_TO_TIMESTAMP, u32, u128 }
 
 #[derive(Copy, Clone)]
-pub(crate) enum Statistic {
+pub enum Statistic {
   Schema = 0,
   BlessedInscriptions = 1,
   Commits = 2,
@@ -719,7 +719,7 @@ impl Index {
     Ok(())
   }
 
-  fn begin_read(&self) -> Result<rtx::Rtx> {
+  pub fn begin_read(&self) -> Result<rtx::Rtx> {
     Ok(rtx::Rtx(self.database.begin_read()?))
   }
 

@@ -142,29 +142,6 @@ pub struct Server {
 impl Server {
   pub fn run(self, settings: Settings, index: Arc<Index>, handle: Handle) -> SubcommandResult {
     Runtime::new()?.block_on(async {
-      let index_clone = index.clone();
-      let integration_test = settings.integration_test();
-
-      let index_thread = thread::spawn(move || loop {
-        if SHUTTING_DOWN.load(atomic::Ordering::Acquire) {
-          break;
-        }
-
-        if !self.no_sync {
-          if let Err(error) = index_clone.update() {
-            log::warn!("Updating index: {error}");
-          }
-        }
-
-        thread::sleep(if integration_test {
-          Duration::from_millis(100)
-        } else {
-          self.polling_interval.into()
-        });
-      });
-
-      INDEXER.lock().unwrap().replace(index_thread);
-
       let settings = Arc::new(settings);
       let acme_domains = self.acme_domains()?;
 

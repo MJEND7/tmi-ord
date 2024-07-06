@@ -85,58 +85,58 @@ pub struct Server {
     long,
     help = "Listen on <ADDRESS> for incoming requests. [default: 0.0.0.0]"
   )]
-  pub(crate) address: Option<String>,
+  pub address: Option<String>,
   #[arg(
     long,
     help = "Request ACME TLS certificate for <ACME_DOMAIN>. This ord instance must be reachable at <ACME_DOMAIN>:443 to respond to Let's Encrypt ACME challenges."
   )]
-  pub(crate) acme_domain: Vec<String>,
+  pub acme_domain: Vec<String>,
   #[arg(
     long,
     help = "Use <CSP_ORIGIN> in Content-Security-Policy header. Set this to the public-facing URL of your ord instance."
   )]
-  pub(crate) csp_origin: Option<String>,
+  pub csp_origin: Option<String>,
   #[arg(
     long,
     help = "Decompress encoded content. Currently only supports brotli. Be careful using this on production instances. A decompressed inscription may be arbitrarily large, making decompression a DoS vector."
   )]
-  pub(crate) decompress: bool,
+  pub decompress: bool,
   #[arg(long, help = "Disable JSON API.")]
-  pub(crate) disable_json_api: bool,
+  pub disable_json_api: bool,
   #[arg(
     long,
     help = "Listen on <HTTP_PORT> for incoming HTTP requests. [default: 80]"
   )]
-  pub(crate) http_port: Option<u16>,
+  pub http_port: Option<u16>,
   #[arg(
     long,
     group = "port",
     help = "Listen on <HTTPS_PORT> for incoming HTTPS requests. [default: 443]"
   )]
-  pub(crate) https_port: Option<u16>,
+  pub https_port: Option<u16>,
   #[arg(long, help = "Store ACME TLS certificates in <ACME_CACHE>.")]
-  pub(crate) acme_cache: Option<PathBuf>,
+  pub acme_cache: Option<PathBuf>,
   #[arg(long, help = "Provide ACME contact <ACME_CONTACT>.")]
-  pub(crate) acme_contact: Vec<String>,
+  pub acme_contact: Vec<String>,
   #[arg(long, help = "Serve HTTP traffic on <HTTP_PORT>.")]
-  pub(crate) http: bool,
+  pub http: bool,
   #[arg(long, help = "Serve HTTPS traffic on <HTTPS_PORT>.")]
-  pub(crate) https: bool,
+  pub https: bool,
   #[arg(long, help = "Redirect HTTP traffic to HTTPS.")]
-  pub(crate) redirect_http_to_https: bool,
+  pub redirect_http_to_https: bool,
   #[arg(long, alias = "nosync", help = "Do not update the index.")]
-  pub(crate) no_sync: bool,
+  pub no_sync: bool,
   #[arg(
     long,
     help = "Proxy `/content/INSCRIPTION_ID` requests to `<CONTENT_PROXY>/content/INSCRIPTION_ID` if the inscription is not present on current chain."
   )]
-  pub(crate) content_proxy: Option<Url>,
+  pub content_proxy: Option<Url>,
   #[arg(
     long,
     default_value = "5s",
     help = "Poll Bitcoin Core every <POLLING_INTERVAL>."
   )]
-  pub(crate) polling_interval: humantime::Duration,
+  pub polling_interval: humantime::Duration,
 }
 
 impl Server {

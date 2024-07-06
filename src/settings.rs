@@ -318,11 +318,6 @@ impl Settings {
       None => Self::default_data_dir()?,
     });
 
-    let psql_uri = match &self.postgres_uri {
-      Some(uri) => uri.clone(),
-      None => panic!("No `postgres_uri` found"),
-    };
-
     let index = match &self.index {
       Some(path) => path.clone(),
       None => data_dir.join("index.redb"),
@@ -338,7 +333,7 @@ impl Settings {
           .unwrap_or_else(|| format!("127.0.0.1:{}", chain.default_rpc_port())),
       ),
       bitcoin_rpc_username: self.bitcoin_rpc_username,
-      postgres_uri: Some(psql_uri),
+      postgres_uri: self.postgres_uri,
       chain: Some(chain),
       commit_interval: Some(self.commit_interval.unwrap_or(5000)),
       config: None,
